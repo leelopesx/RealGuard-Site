@@ -1,0 +1,7 @@
+{
+  "name": "realguard",
+  "compatibility_date": "2026-10-21",
+  "assets": {
+    "directory": "./RealGuard/client/dist"
+  }
+}
