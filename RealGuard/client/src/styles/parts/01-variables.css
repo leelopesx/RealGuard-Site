@@ -1,0 +1,20 @@
+/* Layout (v9): a página é um dia na escola. Cada seção tem um horário na coluna da esquerda (06:58 → 18:00) e o relógio da barra acompanha a rolagem. Cantos retos, linhas finas, vocabulário de câmera de segurança. */
+:root,.feed,.rv,.thumb,.boot,.ph3d,.p3d,.player-box{
+  --tint-rgb:160,190,240; --card:rgba(7,16,34,.45); --nav-bg:rgba(7,16,34,.94); --gold-fill:#d6b25e; --on-gold:#0b2447;
+  --bg:#071022; --surface:#0d1a30; --surface-2:#13223c; --surface-3:#1b2c4a;
+  --line:rgba(var(--tint-rgb),.12); --line-2:rgba(var(--tint-rgb),.22);
+  --fg:#eef2f8; --muted:#a3b1c4; --dim:#6f7f95;
+  --navy:#0b2447; --slate:#283e5c;
+  --accent:#3987e5; --accent-ink:#8fbcf2;
+  --gold:#d6b25e; --gold-2:#f4dd9c; --gold-3:#c49b4a;
+  --good:#22b04a; --bad:#e5484d; --warn:#fab219; --eval:#8a94a6;
+  --s-late:#d95926; --s-out:#199e70;
+  --f-brand:'Poppins','Segoe UI',system-ui,sans-serif;
+  --f-body:'Archivo','Helvetica Neue',Arial,sans-serif;
+  --f-mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --r:4px;
+  --img-sym:url("/assets/realguard-symbol.png");
+  --img-cor:url("/assets/realguard-symbol-color.png");
+  color-scheme:dark;
+}

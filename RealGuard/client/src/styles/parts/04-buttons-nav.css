@@ -1,0 +1,33 @@
+/* ---------- Botões ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:13px 20px;border-radius:var(--r);font-family:var(--f-brand);font-weight:600;font-size:14.5px;transition:background .2s,border-color .2s,color .2s}
+.btn-gold{color:var(--navy);background:var(--gold)}
+.btn-gold:hover{background:var(--gold-2)}
+.btn-line{border:1px solid var(--line-2);color:var(--fg)}
+.btn-line:hover{border-color:var(--fg)}
+.btn .arrow{transition:transform .3s var(--ease)}
+.btn:hover .arrow{transform:translateX(4px)}
+
+/* ---------- Navegação ---------- */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--nav-bg);border-bottom:1px solid var(--line)}
+.nav-in{height:64px;display:flex;align-items:center;gap:18px}
+.brand{display:flex;align-items:center;gap:10px;margin-right:auto}
+.brand .sym{width:30px;height:35px}
+.wordmark{font-family:var(--f-brand);font-size:17px;letter-spacing:.04em;line-height:1;font-weight:700}
+.wordmark span{font-weight:300}
+.nav-links{display:none;align-items:center;font-size:14px}
+.nav-links a{position:relative;padding:21px 11px;color:var(--muted);transition:color .2s}
+.nav-links a:hover{color:var(--fg)}
+.nav-links a::after{content:"";position:absolute;left:11px;right:11px;bottom:-1px;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+.nav-links a[aria-current="true"]{color:var(--fg)}
+.nav-links a[aria-current="true"]::after{transform:scaleX(1)}
+.clock{display:none;align-items:center;gap:8px;padding:6px 10px;border:1px solid var(--line);border-radius:var(--r);font-family:var(--f-mono);font-size:13px;color:var(--fg)}
+.clock i{width:7px;height:7px;border-radius:50%;background:var(--bad);animation:blink 1.4s steps(2,start) infinite}
+.clock small{color:var(--dim);font-size:11px}
+.nav-cta{display:none;padding:10px 16px;font-size:13.5px}
+.menu-btn{display:inline-flex;padding:8px}
+.mnav{border-top:1px solid var(--line);background:var(--surface);padding-block:8px 16px}
+.mnav a{display:block;padding:11px 0;color:var(--muted);border-bottom:1px solid var(--line)}
+.mnav .btn{width:100%;margin-top:14px}
+@media (min-width:760px){.clock{display:inline-flex}}
+@media (min-width:1080px){.nav-links{display:flex}.nav-cta{display:inline-flex}.menu-btn{display:none}.mnav{display:none!important}}
+

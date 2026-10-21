@@ -1,0 +1,3 @@
+Coloque aqui os vídeos do site (os nomes são configurados em server/src/data/videos.json):
+  apresentacao.mp4, reconhecimento.mp4, dashboard.mp4, telegram.mp4
+Para usar YouTube, preencha o campo "youtube" com o ID do vídeo.

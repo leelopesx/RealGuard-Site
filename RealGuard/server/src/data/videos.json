@@ -1,0 +1,6 @@
+[
+  { "title": "Apresentação do RealGuard", "tab": "Apresentação", "caption": "O produto em um minuto: da câmera ao aviso no celular.", "src": "/videos/apresentacao.mp4", "youtube": "" },
+  { "title": "Reconhecimento ao vivo", "tab": "Reconhecimento ao vivo", "caption": "Alunos sendo detectados e reconhecidos em tempo real na AIBox.", "src": "/videos/reconhecimento.mp4", "youtube": "" },
+  { "title": "Painel da escola", "tab": "Painel da escola", "caption": "Presença, turmas, relatórios e cadastro com termo de consentimento.", "src": "/videos/dashboard.mp4", "youtube": "" },
+  { "title": "Alerta no Telegram", "tab": "Alerta no Telegram", "caption": "Gravação real do celular recebendo avisos e o alerta de segurança.", "src": "/videos/telegram.mp4", "youtube": "" }
+]

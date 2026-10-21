@@ -1,0 +1,16 @@
+/* A ordem importa: os blocos finais sobrescrevem os anteriores (como no site original). */
+@import './parts/01-variables.css';
+@import './parts/02-base.css';
+@import './parts/03-boot.css';
+@import './parts/04-buttons-nav.css';
+@import './parts/05-sections.css';
+@import './parts/06-hero.css';
+@import './parts/07-day.css';
+@import './parts/08-how-it-works.css';
+@import './parts/09-recognition.css';
+@import './parts/10-security.css';
+@import './parts/11-telegram.css';
+@import './parts/12-differentials.css';
+@import './parts/13-overrides-v4-v8.css';
+@import './parts/14-theme-light.css';
+@import './parts/15-team-compact.css';

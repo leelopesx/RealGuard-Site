@@ -1,0 +1,20 @@
+/* ---------- Como funciona ---------- */
+.pipe{margin-top:48px;display:grid;gap:0;border:1px solid var(--line)}
+@media (min-width:900px){.pipe{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.stg{position:relative;padding:24px;display:grid;gap:10px;align-content:start;border-bottom:1px solid var(--line)}
+@media (min-width:900px){.stg{border-bottom:0;border-right:1px solid var(--line)}.stg:last-child{border-right:0}}
+.stg .n{font-family:var(--f-mono);font-size:12px;color:var(--dim)}
+.stg .ico{width:44px;height:44px;border:1px solid var(--line-2);display:grid;place-items:center;color:var(--fg);transition:border-color .4s,color .4s,background .4s}
+.stg.on .ico{border-color:var(--accent);color:#fff;background:var(--navy)}
+.stg h3{font-size:1.12rem;font-weight:600}
+.stg p{font-size:14.5px;color:var(--muted)}
+.stg code{font-family:var(--f-mono);font-size:11.5px;color:var(--accent-ink)}
+.stg .pulse{position:absolute;top:46px;right:-6px;width:11px;height:11px;border-top:1px solid var(--line-2);border-right:1px solid var(--line-2);transform:rotate(45deg);background:var(--bg);z-index:1;display:none}
+@media (min-width:900px){.stg:not(:last-child) .pulse{display:block}}
+.sig{position:absolute;left:0;right:0;top:46px;height:1px;pointer-events:none;display:none}
+@media (min-width:900px){.sig{display:block}}
+.sig i{position:absolute;top:-2px;left:0;width:60px;height:5px;background:linear-gradient(90deg,transparent,var(--accent));animation:sig 3.2s linear infinite}
+@keyframes sig{from{transform:translateX(-60px)}to{transform:translateX(calc(100vw))}}
+.close-line{margin-top:40px;font-family:var(--f-brand);font-size:clamp(1.2rem,1rem + .9vw,1.7rem);font-weight:500;line-height:1.3}
+.close-line span{color:var(--muted);font-weight:300}
+

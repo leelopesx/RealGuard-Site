@@ -1,0 +1,30 @@
+/* ---------- Reconhecimento ---------- */
+.recog{margin-top:44px;display:grid;gap:20px}
+@media (min-width:1000px){.recog{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr)}}
+.rv{position:relative;overflow:hidden;border:1px solid var(--line-2);background:linear-gradient(180deg,#0b1424 0%,#070d18 64%,#0c1628 64%,#08101e 100%);aspect-ratio:16/11;max-width:100%}
+.rv .noise{position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 1px,transparent 1px 3px)}
+.rv-person{position:absolute;left:36%;bottom:4%;width:28%;color:#22324f}
+.rv-hood{opacity:0;transition:opacity .35s}
+.rv[data-s="obs"] .rv-hood{opacity:1}
+.rv-box{position:absolute;left:32%;top:12%;width:36%;height:84%;border:2px solid var(--c,var(--eval));transition:border-color .35s}
+.rv-box .tag{position:absolute;left:-2px;top:-24px;font-family:var(--f-mono);font-size:11px;font-weight:600;padding:3px 7px;background:var(--c,var(--eval));color:#02060f;white-space:nowrap;transition:background .35s}
+.rv-box .meta{position:absolute;left:6px;bottom:6px;font-family:var(--f-mono);font-size:10.5px;padding:2px 6px;background:rgba(0,0,0,.8)}
+.rv-hud{position:absolute;left:12px;top:12px;right:12px;display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.states{display:grid;border:1px solid var(--line)}
+.state{display:grid;grid-template-columns:4px 1fr;gap:16px;text-align:left;padding:16px 18px 16px 0;border-bottom:1px solid var(--line);transition:background .25s}
+.state:last-child{border-bottom:0}
+.state:hover{background:rgba(var(--tint-rgb),.04)}
+.state .sw{background:var(--c);opacity:.35;transition:opacity .25s}
+.state[aria-pressed="true"]{background:rgba(var(--tint-rgb),.05)}
+.state[aria-pressed="true"] .sw{opacity:1}
+.state b{display:flex;align-items:baseline;gap:10px;font-family:var(--f-brand);font-weight:600;font-size:15.5px}
+.state b em{font-style:normal;font-family:var(--f-mono);font-size:10.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.state small{display:block;color:var(--muted);font-size:14px;line-height:1.5;margin-top:3px}
+.vote{margin-top:20px;display:grid;gap:16px;padding:20px;border:1px solid var(--line)}
+@media (min-width:700px){.vote{grid-template-columns:auto 1fr;align-items:center;gap:24px}}
+.ballots{display:flex;gap:5px}
+.ballots i{width:12px;height:30px;background:var(--good)}
+.ballots i.x{background:rgba(var(--tint-rgb),.18)}
+.vote h3{font-size:1.05rem;font-weight:600}
+.vote p{color:var(--muted);font-size:14.5px;margin-top:4px}
+

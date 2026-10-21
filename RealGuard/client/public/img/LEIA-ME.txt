@@ -1,0 +1,3 @@
+Coloque aqui as fotos da equipe (configuradas em server/src/data/team.json):
+  arthur.jpg, leticia.jpg, lunna.jpg, marcos.jpg, wallace.jpg
+Se a foto não existir, o card mostra as iniciais.
