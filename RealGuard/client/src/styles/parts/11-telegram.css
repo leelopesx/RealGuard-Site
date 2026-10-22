@@ -2,8 +2,8 @@
 .tg-section{padding:0!important;border:0!important;background:none!important}
 .tg-wrap{margin:0 auto!important}
 .tg-title{font-family:var(--f-brand)!important;font-weight:600!important;letter-spacing:-.025em!important;font-size:clamp(1.9rem,1.2rem + 2.4vw,3.1rem)!important}
-.tg-switch{border-radius:var(--r)!important;background:var(--bg)!important}
-.tg-mode{border-radius:2px!important}
+.tg-switch{border-radius:14px!important;background:var(--bg)!important}
+.tg-mode{border-radius:10px!important}
 .tg-mode[aria-selected="true"]{background:var(--accent)!important}
 .tg-now{background:rgba(57,135,229,.08)!important;border-color:rgba(57,135,229,.3)!important;border-radius:var(--r)!important}
 .tg-now-step{color:var(--accent-ink)!important;font-family:var(--f-mono);font-weight:500!important}
@@ -177,6 +177,11 @@ footer{padding-block:28px;border-top:1px solid var(--line)}
   .tg-msg.out .tg-time { color:#8fb5d6; }
   .tg-photo { margin:-3px -6px 5px; border-radius:11px; overflow:hidden; display:block; }
   .tg-photo svg { display:block; width:100%; height:auto; }
+  /* Cena da foto do alerta: câmera à noite no tema escuro (o claro está em 17-light-poster.css) */
+  .tg-photo .p-wall { fill:#14213a; } .tg-photo .p-side { fill:#1a2a46; } .tg-photo .p-floor { fill:#0e1828; }
+  .tg-photo .p-door { fill:#1f3152; stroke:#2c4269; stroke-width:2; }
+  .tg-photo .p-body { fill:#3a4d6e; } .tg-photo .p-head { fill:#5a6f92; } .tg-photo .p-hair { fill:#2a3a58; }
+  .tg-photo .p-hood { fill:#0a101c; stroke:#2c3b56; stroke-width:1.5; } .tg-photo .p-visor { fill:#000; } .tg-photo .p-eye { fill:#94a3b8; }
   .tg-kb { display:grid; gap:3px; margin-top:3px; }
   .tg-kb-row { display:grid; gap:3px; grid-auto-flow:column; grid-auto-columns:1fr; }
   .tg-kb button { background:rgba(36,52,70,.92); color:#fff; font-size:calc(var(--fs) - 1px); font-weight:500; padding:7px 4px; border-radius:7px; line-height:1.2; transition:background .15s, transform .1s; }

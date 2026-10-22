@@ -6,7 +6,6 @@ import LeadButton from '../ui/LeadButton.jsx';
 export const NAV_LINKS = [
   ['dia', 'Um dia'],
   ['como-funciona', 'Como funciona'],
-  ['reconhecimento', 'Reconhecimento'],
   ['seguranca', 'Segurança'],
   ['telegram', 'Telegram'],
   ['video', 'Vídeos'],

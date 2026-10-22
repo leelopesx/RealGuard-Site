@@ -13,12 +13,20 @@ const OCCURRENCES = [
   { color: 'var(--warn)', title: 'Rosto obstruído', where: 'CAM 02 · Pátio', time: '10:48', pill: 'ok', status: 'RESOLVIDA · ALUNO DE CAPUZ' }
 ];
 
+// Cor que cada pessoa recebe na imagem da câmera.
+const STATUS = [
+  { color: 'var(--good)', title: 'Reconhecido', text: 'Aluno identificado. Presença registrada e família avisada.' },
+  { color: 'var(--bad)', title: 'Não reconhecido', text: 'Rosto sem cadastro, como um visitante.' },
+  { color: 'var(--warn)', title: 'Rosto obstruído', text: 'Mais de 3 s sem mostrar o rosto. Gera alerta.' },
+  { color: 'var(--eval)', title: 'Avaliando', text: 'O sistema ainda está juntando imagens.' }
+];
+
 export default function Security() {
   return (
     <section id="seguranca" className="sec">
       <div className="wrap sec-one">
         <span className="kick">Segurança</span>
-        <div>
+        <div className="secu-grid">
           <h2 className="h2">A portaria avisada na hora certa</h2>
           <p className="lead">
             Câmeras comuns só gravam, e alguém precisa estar olhando quando algo acontece. O RealGuard observa a entrada e
@@ -55,6 +63,18 @@ export default function Security() {
                   </li>
                 ))}
               </ul>
+              <div className="occ-sub">O que cada cor significa</div>
+              <div className="occ-leg">
+                {STATUS.map((s) => (
+                  <div key={s.title} style={{ '--c': s.color }}>
+                    <div className="thumb" />
+                    <span>
+                      <b>{s.title}</b>
+                      <small>{s.text}</small>
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

@@ -77,13 +77,14 @@ export function createTelegramSimulator(root) {
   function photo(kind) {
     const al = kind === 'alerta';
     const box = al ? '#f59e0b' : '#22c55e';
+    // As cores da cena vêm do CSS (.tg-photo .p-*), para acompanhar o tema claro/escuro.
     const head = al
-      ? '<rect x="130" y="52" width="60" height="70" rx="28" fill="#1f2937"/><rect x="138" y="76" width="44" height="12" rx="6" fill="#0b0f17"/><circle cx="150" cy="82" r="4" fill="#94a3b8"/><circle cx="170" cy="82" r="4" fill="#94a3b8"/>'
-      : '<circle cx="160" cy="84" r="28" fill="#c9a27e"/><path d="M132 78c2-22 54-24 56 0-6-10-50-10-56 0z" fill="#3b2a20"/>';
+      ? '<rect class="p-hood" x="130" y="52" width="60" height="70" rx="28"/><rect class="p-visor" x="138" y="76" width="44" height="12" rx="6"/><circle class="p-eye" cx="150" cy="82" r="4"/><circle class="p-eye" cx="170" cy="82" r="4"/>'
+      : '<circle class="p-head" cx="160" cy="84" r="28"/><path class="p-hair" d="M132 78c2-22 54-24 56 0-6-10-50-10-56 0z"/>';
     return (
       '<div class="tg-photo"><svg viewBox="0 0 320 200" role="img" aria-label="Imagem ilustrativa da câmera">' +
-      '<rect width="320" height="200" fill="#d8c7a8"/><rect width="90" height="200" fill="#efe9de"/><rect x="230" y="20" width="70" height="180" fill="#b8874f"/>' +
-      '<path d="M95 200c4-46 30-70 65-70s61 24 65 70z" fill="' + (al ? '#111827' : '#e5e7eb') + '"/>' + head +
+      '<rect class="p-wall" width="320" height="200"/><rect class="p-side" width="90" height="200"/><rect class="p-floor" y="168" width="320" height="32"/><rect class="p-door" x="230" y="20" width="70" height="148"/>' +
+      '<path class="' + (al ? 'p-hood' : 'p-body') + '" d="M95 200c4-46 30-70 65-70s61 24 65 70z"/>' + head +
       '<rect x="110" y="40" width="100" height="160" fill="none" stroke="' + box + '" stroke-width="3"/>' +
       '<rect x="110" y="28" width="' + (al ? 92 : 78) + '" height="13" fill="' + box + '"/><text x="114" y="38" font-size="9" font-family="sans-serif" fill="#000">' +
       (al ? 'Rosto obstruído' : 'Ana Souza · 1º A') + '</text>' +

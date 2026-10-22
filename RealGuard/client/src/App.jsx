@@ -12,7 +12,6 @@ import LeadModal from './components/ui/LeadModal.jsx';
 import Hero from './components/sections/Hero.jsx';
 import DaySection from './components/sections/DaySection.jsx';
 import HowItWorks from './components/sections/HowItWorks.jsx';
-import Recognition from './components/sections/Recognition.jsx';
 import Security from './components/sections/Security.jsx';
 import TelegramSection from './components/sections/TelegramSection.jsx';
 import Differentials from './components/sections/Differentials.jsx';
@@ -28,7 +27,7 @@ export default function App() {
     if (ready) document.documentElement.classList.add('go');
   }, [ready]);
 
-  useRevealOnScroll('.ev, .stg, .state, .sf>div, .occ li, .proof li');
+  useRevealOnScroll('.ev, .stg, .sf>div, .occ li, .proof li');
 
   return (
     <LeadProvider>
@@ -38,7 +37,6 @@ export default function App() {
       <Hero ready={ready} />
       <DaySection />
       <HowItWorks />
-      <Recognition />
       <Security />
       <TelegramSection />
       <Differentials />

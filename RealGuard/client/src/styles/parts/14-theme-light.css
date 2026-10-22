@@ -1,21 +1,13 @@
 
-/* ===== v9: modo claro ===== */
-@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){
-  --bg:#f1f3f7; --surface:#ffffff; --surface-2:#f6f8fb; --surface-3:#e9edf3;
-  --line:rgba(11,36,71,.10); --line-2:rgba(11,36,71,.18);
-  --fg:#0b2447; --muted:#3d5170; --dim:#66758c;
-  --accent:#2a78d6; --accent-ink:#1c5cab;
-  --gold:#8a6a1c; --gold-2:#9c7a2a; --gold-3:#76591a; --gold-fill:#cfa952;
-  --tint-rgb:11,36,71; --card:#ffffff; --nav-bg:rgba(241,243,247,.94);
-  color-scheme:light;
-}}
+/* ===== modo claro: marfim, azul-marinho e dourado (mesma linha do cartaz) ===== */
+/* O index.html sempre põe data-theme no <html>, então basta este seletor. */
 :root[data-theme="light"]{
-  --bg:#f1f3f7; --surface:#ffffff; --surface-2:#f6f8fb; --surface-3:#e9edf3;
-  --line:rgba(11,36,71,.10); --line-2:rgba(11,36,71,.18);
-  --fg:#0b2447; --muted:#3d5170; --dim:#66758c;
-  --accent:#2a78d6; --accent-ink:#1c5cab;
-  --gold:#8a6a1c; --gold-2:#9c7a2a; --gold-3:#76591a; --gold-fill:#cfa952;
-  --tint-rgb:11,36,71; --card:#ffffff; --nav-bg:rgba(241,243,247,.94);
+  --bg:#fbfaf8; --surface:#f4f2ee; --surface-2:#fdfcfb; --surface-3:#e9e6e0;
+  --line:rgba(12,29,58,.10); --line-2:rgba(12,29,58,.18);
+  --fg:#0c1d3a; --muted:#46526a; --dim:#757b88;
+  --navy:#0c1d3a; --accent:#1f4f8f; --accent-ink:#1f4f8f;
+  --gold:#8a5f16; --gold-2:#c99a45; --gold-3:#7a5212; --gold-fill:#c6963f; --on-gold:#0c1d3a;
+  --tint-rgb:12,29,58; --card:#ffffff; --nav-bg:rgba(251,250,248,.9);
   color-scheme:light;
 }
 .feed,.rv,.thumb,.ph3d,.p3d,.player-box{color:var(--fg)}
@@ -60,10 +52,19 @@ a.lk:hover{background:var(--gold-fill);border-color:var(--gold-fill);color:var(-
 .proof li{transition:padding-left .4s var(--ease)}
 .proof li:hover{padding-left:10px}
 :root[data-theme="light"] .brand .sym,:root[data-theme="light"] .sheet .sym{filter:drop-shadow(0 1px 2px rgba(11,36,71,.35))}
-@media (prefers-color-scheme: light){:root:not([data-theme="dark"]) .brand .sym,:root:not([data-theme="dark"]) .sheet .sym{filter:drop-shadow(0 1px 2px rgba(11,36,71,.35))}}
 
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
   .rv-pre{opacity:1;transform:none}
   .boot{display:none}
 }
+
+/* ===== v10: abas de vídeo animadas ===== */
+.vtabs{position:relative;isolation:isolate}
+.vtab-ind{position:absolute;top:0;left:0;z-index:0;background:var(--gold-fill);box-shadow:0 0 18px rgba(214,178,94,.35);transition:transform .45s var(--ease),width .45s var(--ease),height .45s var(--ease);pointer-events:none}
+.vtab{position:relative;z-index:1;transition:background .25s,color .35s var(--ease),transform .15s}
+.vtab:hover{background:rgba(var(--tint-rgb),.06)}
+.vtab:active{transform:scale(.96)}
+.vtab[aria-selected="true"],.vtab[aria-selected="true"]:hover{background:transparent;color:var(--on-gold)}
+.vfade{animation:vIn .45s var(--ease) both}
+@keyframes vIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}

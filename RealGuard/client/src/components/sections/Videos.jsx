@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { getVideos } from '../../services/api.js';
 import { useApiData } from '../../hooks/useApiData.js';
 
@@ -7,6 +7,8 @@ export default function Videos() {
   const { data: videos, error } = useApiData(getVideos);
   const [index, setIndex] = useState(0);
   const [failed, setFailed] = useState(false);
+  const tabsRef = useRef(null);
+  const indRef = useRef(null);
 
   const list = videos || [];
   const v = list[index];
@@ -15,7 +17,24 @@ export default function Videos() {
     setFailed(false);
   };
 
-  const showEmpty = v && !v.youtube && (!v.src || failed);
+  // O destaque dourado desliza até a aba escolhida.
+  useLayoutEffect(() => {
+    const tabs = tabsRef.current;
+    const ind = indRef.current;
+    if (!tabs || !ind) return;
+    const place = () => {
+      const el = tabs.querySelectorAll('.vtab')[index];
+      if (!el) return;
+      ind.style.transform = `translate(${el.offsetLeft}px, ${el.offsetTop}px)`;
+      ind.style.width = `${el.offsetWidth}px`;
+      ind.style.height = `${el.offsetHeight}px`;
+    };
+    place();
+    window.addEventListener('resize', place);
+    return () => window.removeEventListener('resize', place);
+  }, [index, list.length]);
+
+  const showEmpty =v && !v.youtube && (!v.src || failed);
 
   return (
     <section id="video" className="sec">
@@ -23,7 +42,8 @@ export default function Videos() {
         <span className="kick">Vídeos</span>
         <div>
           <h2 className="h2">Veja funcionando</h2>
-          <div className="vtabs" role="tablist" aria-label="Escolher vídeo">
+          <div className="vtabs" role="tablist" aria-label="Escolher vídeo" ref={tabsRef}>
+            <span className="vtab-ind" ref={indRef} aria-hidden="true" />
             {list.map((item, i) => (
               <button
                 type="button"
@@ -38,7 +58,7 @@ export default function Videos() {
             ))}
           </div>
           <div className="player">
-            <div className="player-box">
+            <div className="player-box vfade" key={index}>
               {v && !v.youtube && v.src && !failed && (
                 <video key={v.src} src={v.src} controls playsInline preload="metadata" onError={() => setFailed(true)} />
               )}
@@ -58,7 +78,7 @@ export default function Videos() {
                 </div>
               )}
             </div>
-            <p className="player-cap">{v?.caption}</p>
+            <p className="player-cap vfade" key={`cap-${index}`}>{v?.caption}</p>
           </div>
         </div>
       </div>

@@ -1,0 +1,127 @@
+/* ===== Modo claro: acabamento no estilo do cartaz =====
+   Fundo marfim com luz quente, títulos em azul-marinho forte, dourado metálico
+   nos destaques e faixas azul-marinho no fechamento (chamada final e rodapé). */
+:root[data-theme="light"]{
+  --gold-grad:linear-gradient(180deg,#d4a752 0%,#b07f2c 55%,#7a5212 100%);
+  --btn-grad:linear-gradient(135deg,#dcb262 0%,#c08a35 100%);
+  --shadow-card:0 1px 0 rgba(255,255,255,.7) inset,0 18px 40px -26px rgba(12,29,58,.35);
+}
+[data-theme="light"] body{background:radial-gradient(1100px 620px at 88% -8%,rgba(214,165,74,.05),transparent 62%),var(--bg)}
+
+/* Títulos: marinho, mais peso; a parte dourada com brilho metálico */
+[data-theme="light"] .hero h1,[data-theme="light"] .h2,[data-theme="light"] .final h2{font-weight:700;color:var(--fg)}
+[data-theme="light"] .hero h1 .l2{font-weight:400;color:var(--muted)}
+[data-theme="light"] .hero h1 .l3,[data-theme="light"] .gold-t,[data-theme="light"] .pf-n,[data-theme="light"] .fc-n{background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+[data-theme="light"] .pf-n small{-webkit-text-fill-color:var(--dim)}
+
+/* Rótulo da seção com o fio dourado do cartaz */
+[data-theme="light"] .kick{letter-spacing:.16em}
+[data-theme="light"] .kick::after{content:"";display:block;width:56px;height:2px;margin-top:10px;border-radius:2px;background:var(--btn-grad)}
+[data-theme="light"] .stp-kick .kick::after{display:none}
+
+/* Botões dourados */
+[data-theme="light"] .btn-gold{background:var(--btn-grad);color:var(--on-gold);box-shadow:0 10px 24px -12px rgba(176,127,44,.7)}
+[data-theme="light"] .btn-gold:hover{filter:brightness(1.05)}
+[data-theme="light"] .btn-line{border-color:rgba(12,29,58,.28)}
+[data-theme="light"] .btn-line:hover{border-color:var(--fg);background:rgba(12,29,58,.04)}
+
+/* Cartões: papel claro com sombra suave */
+[data-theme="light"] :is(.member,.fc,.occ,.pf-show,.art,.player,.vtabs,.states,.cell){background:var(--card);border-color:var(--line);box-shadow:var(--shadow-card)}
+[data-theme="light"] .fc.on{border-color:rgba(176,127,44,.45)}
+[data-theme="light"] .fc.cur{box-shadow:0 0 0 1px rgba(176,127,44,.35),0 24px 50px -28px rgba(176,127,44,.55)}
+[data-theme="light"] .car-track .ph{background:radial-gradient(80% 90% at 30% 20%,#1d3156,#0c1d3a)!important}
+[data-theme="light"] .pf-tab[aria-selected="true"]{background:rgba(198,150,63,.10)}
+
+/* Fechamento em faixa azul-marinho, como a base do cartaz */
+/* A chamada final e o rodapé formam um bloco azul de ponta a ponta, com o fio dourado em cima */
+[data-theme="light"] :is(.final-band,footer){
+  --fg:#f3f5fa; --muted:#b9c3d3; --dim:#8a97ab;
+  --line:rgba(255,255,255,.12); --line-2:rgba(255,255,255,.24); --tint-rgb:160,190,240;
+  --gold:#d6b25e; --gold-2:#f4dd9c; --gold-3:#c49b4a;
+  --gold-grad:linear-gradient(180deg,#f4dd9c,#d6b25e 55%,#b88a3a);
+  color:var(--fg);background:#0c1d3a
+}
+[data-theme="light"] .final-band{border-top:3px solid #c6963f;background:radial-gradient(1100px 460px at 92% 0%,rgba(214,178,94,.16),transparent 60%),#0c1d3a}
+[data-theme="light"] .final{border-top:0}
+[data-theme="light"] footer{border-top:1px solid var(--line)}
+
+/* Miniaturas das ocorrências: imagem clara, pessoa em cinza-azulado */
+[data-theme="light"] .thumb{background:linear-gradient(180deg,#f2f1ee,#e2dfd9);border-color:rgba(12,29,58,.12);box-shadow:inset 0 -10px 18px -12px rgba(12,29,58,.25)}
+[data-theme="light"] .thumb::before{border-width:2px}
+[data-theme="light"] .thumb::after{background:#8d9ab0}
+
+/* ===== Mockups no modo claro ===== */
+/* Câmera do topo: imagem de dia, barras brancas */
+[data-theme="light"] .feed{--fg:#0c1d3a;--muted:#46526a;--dim:#757b88;--line:rgba(12,29,58,.10);--line-2:rgba(12,29,58,.16);--tint-rgb:12,29,58;
+  background:#fff;box-shadow:0 50px 80px -44px rgba(12,29,58,.45)}
+[data-theme="light"] :is(.feed-bar,.feed-foot){background:#fff}
+[data-theme="light"] .feed-view{background:linear-gradient(180deg,#eef0f4 0%,#e3e7ee 62%,#dedbd5 62%,#e8e6e1 100%)}
+[data-theme="light"] .feed-view .noise{background:repeating-linear-gradient(0deg,rgba(12,29,58,.025) 0 1px,transparent 1px 3px)}
+[data-theme="light"] .person{color:#8d9ab0}
+[data-theme="light"] .det .who{background:rgba(255,255,255,.92);color:#0c1d3a}
+[data-theme="light"] .votes{background:rgba(255,255,255,.88)}
+[data-theme="light"] .shadow-floor,[data-theme="light"] .p3d-shadow{background:radial-gradient(50% 50% at 50% 50%,rgba(12,29,58,.28),transparent 70%)}
+
+/* Celulares: aro prateado */
+[data-theme="light"] :is(.ph3d,.iphone) .lay{background:#c3c8d1}
+[data-theme="light"] :is(.ph3d,.iphone) .lay.edge{background:linear-gradient(90deg,#eef0f4,#b4bac5 40%,#dfe2e8)}
+[data-theme="light"] .ph3d .face{background:linear-gradient(145deg,#f1f3f6,#c3c8d1);box-shadow:inset 0 0 0 1.5px #aeb5c1}
+[data-theme="light"] .iphone{background:linear-gradient(145deg,#f1f3f6,#c3c8d1);box-shadow:inset 0 0 0 1.5px #aeb5c1,0 40px 70px -36px rgba(12,29,58,.45)}
+[data-theme="light"] :is(.ph3d .back,.iphone .pback){background:linear-gradient(150deg,#e9ecf1,#c3c8d1)}
+[data-theme="light"] :is(.ph3d .back,.iphone .pback)::before{background:#2b3446;box-shadow:inset 0 0 0 2px #aeb5c1}
+
+/* Telegram em tema claro (celular do topo, notificações e celular interativo) */
+[data-theme="light"] :is(.mini-scr,.iphone-screen){background:#e7edf2}
+[data-theme="light"] :is(.mini-scr .st,.mini-scr .hd,.ios-status,.tg-header,.tg-pinned,.tg-input,.ios-home){background:#fff;color:#0c1d3a;border-color:rgba(12,29,58,.08)}
+[data-theme="light"] :is(.mini-scr .hd small,.tg-sub,.tg-time,.tg-field,.tg-clip,.tg-cmds span){color:#7d8a98}
+[data-theme="light"] :is(.mini-scr .bd,.tg-chat){background-color:#e7edf2;background-image:radial-gradient(rgba(31,79,143,.07) 1px,transparent 1px)}
+[data-theme="light"] :is(.bub,.tg-msg.in .tg-bubble){background:#fff;color:#1b2533;box-shadow:0 1px 1px rgba(12,29,58,.10)}
+[data-theme="light"] .tg-msg.out .tg-bubble{background:#e3f3d3;color:#1b2533;box-shadow:0 1px 1px rgba(12,29,58,.10)}
+[data-theme="light"] .tg-msg.out .tg-time{color:#5a9a52}
+[data-theme="light"] :is(.bub b,.tg-bubble b){color:#0c1d3a}
+[data-theme="light"] .tg-bubble i{color:#5d6b7a}
+[data-theme="light"] :is(.bub time){color:#7d8a98}
+[data-theme="light"] :is(.tg-bubble a,.tg-back,.tg-pinned b,.tg-sub.typing){color:#2a8bd6}
+[data-theme="light"] .tg-pinned .bar{background:#2a8bd6}
+[data-theme="light"] .tg-pinned{color:#46526a}
+[data-theme="light"] .bub .pic{background:linear-gradient(180deg,#eef0f4,#dddad4)}
+[data-theme="light"] .bub .pic::after{background:#8d9ab0}
+[data-theme="light"] .tg-kb button{background:rgba(42,139,214,.12);color:#1f6fb0}
+[data-theme="light"] .tg-kb button:hover{background:rgba(42,139,214,.2)}
+[data-theme="light"] :is(.tg-kb button:active,.tg-kb button.pressed){background:rgba(42,139,214,.28)}
+[data-theme="light"] .tg-cmds{background:#fff;box-shadow:0 10px 30px rgba(12,29,58,.2)}
+[data-theme="light"] .tg-cmds button{color:#0c1d3a}
+[data-theme="light"] .tg-cmds button:hover{background:rgba(12,29,58,.05)}
+[data-theme="light"] .ios-home::after{background:#0c1d3a;opacity:.7}
+[data-theme="light"] .ios-status svg{color:#0c1d3a;fill:currentColor}
+
+/* Cartões do "Um dia": balão claro e botões azuis do Telegram */
+[data-theme="light"] .tgline{background:#eaf1f7;color:#1b2533}
+[data-theme="light"] .tgline b{color:#0c1d3a}
+[data-theme="light"] .tgline time{color:#7d8a98}
+[data-theme="light"] .tgbtns span{background:#fff;color:#1f6fb0;box-shadow:inset 0 0 0 1px rgba(31,111,176,.22)}
+
+/* Capa "Veja funcionando" do celular: vidro claro */
+[data-theme="light"] .tg-cover{background:rgba(251,250,248,.72)}
+[data-theme="light"] .tg-cover-title{color:#0c1d3a}
+[data-theme="light"] .tg-cover-sub{color:#46526a}
+[data-theme="light"] .tg-cover-link{color:#757b88}
+[data-theme="light"] .tg-cover-link:hover{color:#0c1d3a}
+[data-theme="light"] .tg-play{box-shadow:0 0 0 10px rgba(198,150,63,.18),0 12px 30px rgba(176,127,44,.35)}
+
+/* Passo a passo ao lado do celular */
+[data-theme="light"] .tg-now{background:rgba(198,150,63,.08);border-color:rgba(198,150,63,.3)}
+[data-theme="light"] .tg-now-step{color:var(--gold)}
+[data-theme="light"] .tg-now-text{color:var(--fg)}
+[data-theme="light"] .tg-now-bar{background:rgba(12,29,58,.08)}
+
+/* Foto do alerta no chat: cena de dia */
+[data-theme="light"] .tg-photo .p-wall{fill:#e3e7ee}
+[data-theme="light"] .tg-photo .p-side{fill:#eef0f4}
+[data-theme="light"] .tg-photo .p-floor{fill:#dedbd5}
+[data-theme="light"] .tg-photo .p-door{fill:#d9d5ce;stroke:#c3beb5}
+[data-theme="light"] .tg-photo .p-body{fill:#8d9ab0}
+[data-theme="light"] .tg-photo .p-head{fill:#a3afc2}
+[data-theme="light"] .tg-photo .p-hair{fill:#6f7d94}
+[data-theme="light"] .tg-photo .p-hood{fill:#2b3446}
+[data-theme="light"] .tg-photo .p-visor{fill:#0b0f17}

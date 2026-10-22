@@ -1,0 +1,37 @@
+/* ===== Diferenciais: números passando sozinhos ===== */
+.pf-show{margin-top:40px;border:1px solid var(--line);border-radius:var(--rc);background:var(--card);overflow:hidden}
+.pf-stage{position:relative;min-height:260px;display:grid;align-items:center;padding:clamp(28px,4vw,56px)}
+.pf-slide{display:grid;gap:18px 56px;align-items:center;animation:pfIn .7s var(--ease) both}
+@media (min-width:860px){.pf-slide{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}}
+.pf-big{font-size:clamp(4.6rem,2.6rem + 7vw,9rem);line-height:.95}
+.pf-big small{font-size:.26em}
+.pf-txt b{display:block;font-family:var(--f-brand);font-weight:600;font-size:clamp(1.35rem,1rem + 1vw,1.9rem);line-height:1.2;text-wrap:balance}
+.pf-txt p{margin:12px 0 0;color:var(--muted);font-size:clamp(15px,.9rem + .25vw,17.5px);line-height:1.65;max-width:46ch;animation:pfIn .7s .12s var(--ease) both}
+@keyframes pfIn{from{opacity:0;transform:translateY(18px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+
+.pf-nav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid var(--line)}
+.pf-tab{display:grid;gap:8px;align-content:start;text-align:left;padding:0 18px 18px;border-right:1px solid var(--line);color:var(--dim);transition:background .25s,color .3s}
+.pf-tab:last-child{border-right:0}
+.pf-tab:hover{background:rgba(var(--tint-rgb),.04);color:var(--muted)}
+.pf-tab[aria-selected="true"]{color:var(--fg);background:rgba(var(--tint-rgb),.05)}
+.pf-bar{display:block;height:2px;margin:0 -18px 8px;background:rgba(var(--tint-rgb),.12);overflow:hidden}
+.pf-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold-3),var(--gold-2));transform-origin:left;transform:scaleX(0)}
+.pf-tab[data-done] .pf-bar i{transform:scaleX(1);opacity:.45}
+.pf-tab[aria-selected="true"] .pf-bar i{animation:pfFill 6s linear forwards;box-shadow:0 0 10px rgba(214,178,94,.6)}
+.pf-show.paused .pf-tab[aria-selected="true"] .pf-bar i{animation-play-state:paused}
+@keyframes pfFill{to{transform:scaleX(1)}}
+.pf-mini{font-family:var(--f-brand);font-weight:600;font-size:22px;line-height:1;letter-spacing:-.03em;transition:color .3s}
+.pf-mini small{font-size:.55em;font-weight:500;margin-left:4px;color:var(--dim)}
+.pf-tab[aria-selected="true"] .pf-mini{color:var(--gold)}
+.pf-lbl{font-size:13px;line-height:1.35}
+@media (max-width:699px){
+  .pf-tab{padding:0 8px 14px;text-align:center}
+  .pf-bar{margin-inline:-8px}
+  .pf-mini{font-size:17px}
+  .pf-mini small,.pf-lbl{display:none}
+}
+
+/* Sem animação: mostra o número escolhido e não troca sozinho */
+@media (prefers-reduced-motion:reduce){
+  .pf-tab[aria-selected="true"] .pf-bar i{transform:scaleX(1)}
+}
