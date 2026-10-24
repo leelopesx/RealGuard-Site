@@ -1,0 +1,204 @@
+diff --git a/RealGuard/client/index.html b/RealGuard/client/index.html
+index 00c0553..79c6816 100644
+--- a/RealGuard/client/index.html
++++ b/RealGuard/client/index.html
+@@ -10,12 +10,8 @@
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+     <script>
+-      // Aplica o tema (salvo ou do sistema) antes do React carregar (evita piscar).
+-      // O CSS do modo claro depende só de html[data-theme="light"].
+-      var t = null;
+-      try { t = localStorage.getItem('rg_theme'); } catch (e) {}
+-      if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+-      document.documentElement.dataset.theme = t;
++      // O site sempre abre no modo escuro (antes do React carregar, para não piscar).
++      document.documentElement.dataset.theme = 'dark';
+     </script>
+   </head>
+   <body>
+diff --git a/RealGuard/client/src/App.jsx b/RealGuard/client/src/App.jsx
+index 2f9d3d8..8de62e2 100644
+--- a/RealGuard/client/src/App.jsx
++++ b/RealGuard/client/src/App.jsx
+@@ -30,7 +30,7 @@ export default function App() {
+   useRevealOnScroll('.ev, .stg, .sf>div, .occ li, .proof li');
+ 
+   return (
+-    <LeadProvider>
++    <LeadProvider autoOpen={ready}>
+       <Boot onDone={handleBootDone} />
+       <LeadModal />
+       <Navbar />
+diff --git a/RealGuard/client/src/context/LeadContext.jsx b/RealGuard/client/src/context/LeadContext.jsx
+index 17ba77f..46a8910 100644
+--- a/RealGuard/client/src/context/LeadContext.jsx
++++ b/RealGuard/client/src/context/LeadContext.jsx
+@@ -1,13 +1,14 @@
+ import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+ import { local, session } from '../utils/storage.js';
+ 
+-// Abre o cadastro sozinho uma vez por visitante, depois deste tempo.
++// Abre o cadastro sozinho assim que a abertura (Boot) termina.
++// Não reaparece para quem já enviou, nem na mesma sessão depois de fechar.
+ const OPEN_LEAD_ON_LOAD = true;
+-const OPEN_LEAD_DELAY_MS = 7000;
++const OPEN_LEAD_DELAY_MS = 300;
+ 
+ const LeadContext = createContext(null);
+ 
+-export function LeadProvider({ children }) {
++export function LeadProvider({ children, autoOpen = true }) {
+   const [open, setOpen] = useState(false);
+   const [done, setDone] = useState(() => local.get('rg_lead_done') === '1');
+ 
+@@ -23,12 +24,12 @@ export function LeadProvider({ children }) {
+ 
+   useEffect(() => {
+     const skipped = session.get('rg_lead_skip') === '1';
+-    if (!OPEN_LEAD_ON_LOAD || done || skipped) return;
++    if (!OPEN_LEAD_ON_LOAD || !autoOpen || done || skipped) return;
+     const t = setTimeout(() => setOpen(true), OPEN_LEAD_DELAY_MS);
+     return () => clearTimeout(t);
+-    // só no primeiro carregamento
++    // só quando a abertura termina
+     // eslint-disable-next-line react-hooks/exhaustive-deps
+-  }, []);
++  }, [autoOpen]);
+ 
+   const value = useMemo(
+     () => ({ open, done, openLead, closeLead, markDone }),
+diff --git a/RealGuard/client/src/hooks/useTheme.js b/RealGuard/client/src/hooks/useTheme.js
+index 2990315..092e8da 100644
+--- a/RealGuard/client/src/hooks/useTheme.js
++++ b/RealGuard/client/src/hooks/useTheme.js
+@@ -1,36 +1,16 @@
+ import { useEffect, useState } from 'react';
+-import { local } from '../utils/storage.js';
+ 
+-const lightQuery = () => window.matchMedia('(prefers-color-scheme: light)');
+-const saved = () => {
+-  const t = local.get('rg_theme');
+-  return t === 'light' || t === 'dark' ? t : null;
+-};
+-
+-// Tema claro/escuro: segue o sistema até a pessoa escolher; a escolha fica salva.
++// Tema claro/escuro: o site sempre abre no escuro.
++// O botão troca o tema só durante a visita; ao abrir de novo, volta ao escuro.
+ // O tema vai sempre para html[data-theme], que é o único gatilho do CSS.
+ export function useTheme() {
+-  const [chosen, setChosen] = useState(saved);
+-  const [systemLight, setSystemLight] = useState(() => lightQuery().matches);
+-
+-  useEffect(() => {
+-    const mq = lightQuery();
+-    const onChange = () => setSystemLight(mq.matches);
+-    mq.addEventListener('change', onChange);
+-    return () => mq.removeEventListener('change', onChange);
+-  }, []);
+-
+-  const theme = chosen || (systemLight ? 'light' : 'dark');
++  const [theme, setTheme] = useState('dark');
+ 
+   useEffect(() => {
+     document.documentElement.dataset.theme = theme;
+   }, [theme]);
+ 
+-  const toggle = () => {
+-    const next = theme === 'light' ? 'dark' : 'light';
+-    local.set('rg_theme', next);
+-    setChosen(next);
+-  };
++  const toggle = () => setTheme((t) => (t === 'light' ? 'dark' : 'light'));
+ 
+   return { theme, toggle };
+ }
+diff --git a/RealGuard/worker/index.js b/RealGuard/worker/index.js
+new file mode 100644
+index 0000000..c13a96c
+--- /dev/null
++++ b/RealGuard/worker/index.js
+@@ -0,0 +1,63 @@
++// Worker da Cloudflare: responde a API (/api/*) no site publicado.
++// O restante (o site React em client/dist) é entregue pelos "assets".
++// Os dados vêm dos mesmos arquivos usados pelo servidor Node.
++import team from '../server/src/data/team.json';
++import videos from '../server/src/data/videos.json';
++import { validateLead } from '../server/src/utils/validateLead.js';
++
++const json = (data, status = 200) =>
++  new Response(JSON.stringify(data), {
++    status,
++    headers: { 'Content-Type': 'application/json; charset=utf-8' }
++  });
++
++async function createLead(request, env) {
++  let body;
++  try {
++    body = await request.json();
++  } catch {
++    return json({ ok: false, error: 'Dados inválidos.' }, 400);
++  }
++
++  // Campo "website" escondido: só robôs preenchem. Fingimos sucesso e descartamos.
++  if (body.website) return json({ ok: true }, 201);
++
++  const { errors, lead } = validateLead(body);
++  if (errors.length) return json({ ok: false, error: errors[0] }, 400);
++
++  // Aqui não há arquivo para guardar uma cópia: sem planilha, o contato se perderia.
++  if (!env.SHEETS_URL) {
++    console.error('[RealGuard] SHEETS_URL não configurada no Worker');
++    return json({ ok: false, error: 'O cadastro está indisponível no momento. Tente mais tarde.' }, 503);
++  }
++
++  try {
++    const res = await fetch(env.SHEETS_URL, { method: 'POST', body: new URLSearchParams(lead) });
++    if (!res.ok) throw new Error(`Planilha respondeu ${res.status}`);
++  } catch (err) {
++    console.error('[RealGuard] falha ao enviar para a planilha:', err.message);
++    return json({ ok: false, error: 'Não foi possível salvar seu contato agora. Tente de novo em instantes.' }, 502);
++  }
++  return json({ ok: true }, 201);
++}
++
++export default {
++  async fetch(request, env) {
++    const { pathname } = new URL(request.url);
++    const route = `${request.method} ${pathname.replace(/\/+$/, '')}`;
++
++    switch (route) {
++      case 'GET /api/health':
++        return json({ status: 'ok', time: new Date().toISOString() });
++      case 'GET /api/team':
++        return json(team);
++      case 'GET /api/videos':
++        return json(videos);
++      case 'POST /api/leads':
++        return createLead(request, env);
++    }
++
++    if (pathname.startsWith('/api/')) return json({ ok: false, error: 'Rota não encontrada.' }, 404);
++    return env.ASSETS.fetch(request);
++  }
++};
+diff --git a/RealGuard/wrangler.jsonc b/RealGuard/wrangler.jsonc
+index 9e1723a..06deca3 100644
+--- a/RealGuard/wrangler.jsonc
++++ b/RealGuard/wrangler.jsonc
+@@ -1,7 +1,14 @@
+ {
+   "name": "realguard",
+   "compatibility_date": "2026-09-01",
++  // Worker que responde /api/team, /api/videos e /api/leads no site publicado.
++  "main": "worker/index.js",
+   "assets": {
+-    "directory": "./client/dist"
++    "directory": "./client/dist",
++    "binding": "ASSETS",
++    "run_worker_first": ["/api/*"],
++    "not_found_handling": "single-page-application"
+   }
++  // A URL da planilha NÃO fica aqui: cadastre SHEETS_URL como variável secreta
++  // no painel da Cloudflare (Workers → realguard → Settings → Variables and Secrets).
+ }
