@@ -32,9 +32,7 @@ function Member({ m }) {
       <div className="m-body">
         <div className="m-id">
           <b>{m.nome}</b>
-          <small className={m.funcao ? '' : 'empty'}>{m.funcao || 'Função no projeto'}</small>
         </div>
-        <p className={'m-about' + (m.sobre ? '' : ' empty')}>{m.sobre || 'Uma frase sobre você e o que fez no RealGuard.'}</p>
         <div className="m-links">
           <ProfileLink url={m.linkedin} icon="linkedin" label="LinkedIn" />
           <ProfileLink url={m.github} icon="github" label="GitHub" />

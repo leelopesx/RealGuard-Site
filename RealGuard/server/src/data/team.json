@@ -3,5 +3,5 @@
   { "nome": "Marcos Vinícius", "iniciais": "MV", "foto": "/img/marcos.jpg", "funcao": "", "sobre": "", "linkedin": "", "github": "" },
   { "nome": "Lunna Vartanian", "iniciais": "LV", "foto": "/img/lunna.jpg", "funcao": "", "sobre": "", "linkedin": "https://www.linkedin.com/in/lunna-castanho-vartanian-ab8366227/", "github": "" },
   { "nome": "Arthur Augusto", "iniciais": "AA", "foto": "/img/arthur.jpg", "funcao": "", "sobre": "", "linkedin": "https://www.linkedin.com/in/arthur-augusto-novi-ba8544280", "github": "" },
-  { "nome": "Leticia Lopes", "iniciais": "LL", "foto": "/img/leticia.jpg", "funcao": "", "sobre": "", "linkedin": "https://www.linkedin.com/in/leticia-lopes-5941712a4", "github": "" }
+  { "nome": "Leticia Lopes", "iniciais": "LL", "foto": "/img/leticia.jpg", "funcao": "", "sobre": "", "linkedin": "https://www.linkedin.com/in/leticia-lopes-5941712a4", "github": "https://github.com/leelopesx" }
 ]
