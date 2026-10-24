@@ -30,7 +30,7 @@ export default function App() {
   useRevealOnScroll('.ev, .stg, .sf>div, .occ li, .proof li');
 
   return (
-    <LeadProvider>
+    <LeadProvider autoOpen={ready}>
       <Boot onDone={handleBootDone} />
       <LeadModal />
       <Navbar />

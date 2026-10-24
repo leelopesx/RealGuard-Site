@@ -1,13 +1,14 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { local, session } from '../utils/storage.js';
 
-// Abre o cadastro sozinho uma vez por visitante, depois deste tempo.
+// Abre o cadastro sozinho assim que a abertura (Boot) termina.
+// Não reaparece para quem já enviou, nem na mesma sessão depois de fechar.
 const OPEN_LEAD_ON_LOAD = true;
-const OPEN_LEAD_DELAY_MS = 7000;
+const OPEN_LEAD_DELAY_MS = 300;
 
 const LeadContext = createContext(null);
 
-export function LeadProvider({ children }) {
+export function LeadProvider({ children, autoOpen = true }) {
   const [open, setOpen] = useState(false);
   const [done, setDone] = useState(() => local.get('rg_lead_done') === '1');
 
@@ -23,12 +24,12 @@ export function LeadProvider({ children }) {
 
   useEffect(() => {
     const skipped = session.get('rg_lead_skip') === '1';
-    if (!OPEN_LEAD_ON_LOAD || done || skipped) return;
+    if (!OPEN_LEAD_ON_LOAD || !autoOpen || done || skipped) return;
     const t = setTimeout(() => setOpen(true), OPEN_LEAD_DELAY_MS);
     return () => clearTimeout(t);
-    // só no primeiro carregamento
+    // só quando a abertura termina
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [autoOpen]);
 
   const value = useMemo(
     () => ({ open, done, openLead, closeLead, markDone }),

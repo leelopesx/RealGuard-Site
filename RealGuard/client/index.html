@@ -10,12 +10,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
     <script>
-      // Aplica o tema (salvo ou do sistema) antes do React carregar (evita piscar).
-      // O CSS do modo claro depende só de html[data-theme="light"].
-      var t = null;
-      try { t = localStorage.getItem('rg_theme'); } catch (e) {}
-      if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-      document.documentElement.dataset.theme = t;
+      // O site sempre abre no modo escuro (antes do React carregar, para não piscar).
+      document.documentElement.dataset.theme = 'dark';
     </script>
   </head>
   <body>
